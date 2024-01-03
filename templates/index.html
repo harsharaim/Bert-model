@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Uploader</title>
+  <script src="/static/script.js"></script>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+
+<div id="uploader">
+        <div id="drag-drop-parent" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+            <div id="drag-drop-child">
+                <div id="icon">
+                    <img src="/static/images/cloud-upload-svgrepo-com.svg"  id="cloud-image" height="300" width="300">
+                    <p>drag and drop</p>
+                </div>
+                <h3 id="or">or</h3>
+                <input type="file" id="file-input" accept="video/*" onchange="handleFiles(this.files)" hidden>
+                <button id="upload" onclick="browseFile()">Upload</button>
+            </div>
+        </div>
+        <div id="partition"></div>
+    <div id="file_process_container" >
+        <div class="fileProcess">
+            <div id="file-info">
+                <div id="filename">
+                    <span id="filename-span">filename.mp4</span>
+                    <span id="cancel_button" onclick="cancel()">&#x2715</span>
+                </div>
+                <div id="progress-bar">
+                    <div id="progress"></div>
+                </div>
+            </div>
+            <div id="buttons">
+                <button id="process" onclick="processVideo()" >Proceed</button>
+            </div>
+        </div>
+                    
+            <div id="output" >
+                <div class="head_copy">
+                    <div id="heading">
+                        <h3>output</h4>
+                    </div>
+                    <div id="copy" onclick="copy()">
+                        <img src="/static/images/copy-svgrepo-com.svg" height="20" width="20" alt="copy">
+                    </div>
+                </div>
+                <p id="output_content"></p>
+            </div>
+        
+    </div>
+</div>
+
+</body>
+</html>
+
+
