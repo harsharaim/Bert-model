@@ -1,18 +1,19 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify
 import os
 import moviepy.editor as mp
 import speech_recognition as sr
 import logging
 
-app = Flask(__name__,static_folder='static')
+app = Flask(__name__)
+
 app.logger.setLevel(logging.DEBUG)
 
-@app.route('/', methods=['GET'])
-def homePage():
-    return render_template('index.html')
+@app.route('/',methods=['GET'])
+def home():
+    return jsonify({'api':"root"})
 
-@app.route('/process_video', methods=['POST'])
-def process_video():
+@app.route('/transcribe_video', methods=['POST'])
+def transcribe_video():
     # Check if the 'video' file is present in the request
     if 'video' not in request.files:
         return jsonify({'error': 'No video file provided'})
@@ -30,8 +31,10 @@ def process_video():
     video_path = os.path.join("uploads", video_file.filename)
     video_file.save(video_path)
 
+    # Process the video to transcribe audio to text
     input_string = process_video_audio(video_path)
-    return jsonify({'text': input_string})
+
+    return jsonify({'transcription': input_string})
 
 def process_video_audio(video_path):
     video = mp.VideoFileClip(video_path)
